@@ -1,0 +1,62 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Text processor",
+    "version" : "1.0.0",
+    "title" : "Text Processor",
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "text-processor.herokuapp.com",
+  "basePath" : "/api",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/first" : {
+      "post" : {
+        "summary" : "First n Lines",
+        "description" : "Returns the first n lines of the text",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "input",
+          "description" : "A text to be processed",
+          "in" : "body",
+          "name" : "n",
+          "description" : "The number of lines to be returned",
+          "schema" : {
+            "type" : "object",
+            "properties" : {
+              "input" : {
+                "type" : "string",
+                "example" : "Lorem ipsum \ndolor sit amet,\n consectetur adipiscing elit,\n sed do eiusmod tempor incididunt ut \nlabore et dolore magna aliqua. "
+              },
+              "n" : {
+                "type" : "integer",
+                "example" : 2
+              }  
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful",
+            "schema" : {
+              "type" : "string",
+              "example" : "Lorem ipsum \ndolor sit amet,"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "type" : "object",
+              "example" : {"message" : "Use the format: {'input': 'string to be processed', 'n': 'first n number of lines to be returned'}"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
